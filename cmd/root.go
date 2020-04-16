@@ -17,19 +17,15 @@ package cmd
 
 import (
   "fmt"
-  "github.com/mitchellh/go-homedir"
+  "github.com/bmsandoval/gofastcom/services/fastcom_svc"
   "github.com/spf13/cobra"
-  "medic/config"
   "os"
 )
 
 
-var cfgFile string
-
-
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
-  Use:   "medic",
+  Use:   "gofastcom",
   Short: "A brief description of your application",
   Long: `A longer description that spans multiple lines and likely contains
 examples and usage of using your application. For example:
@@ -37,9 +33,9 @@ examples and usage of using your application. For example:
 Cobra is a CLI library for Go that empowers applications.
 This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
-  // Uncomment the following line if your bare application
-  // has an action associated with it:
-  //	Run: func(cmd *cobra.Command, args []string) { },
+  //Uncomment the following line if your bare application
+  //has an action associated with it:
+  	Run: Measure,
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.
@@ -51,55 +47,19 @@ func Execute() {
   }
 }
 
-func init() {
-  cobra.OnInitialize(initConfig)
-
-  // Here you will define your flags and configuration settings.
-  // Cobra supports persistent flags, which, if defined here,
-  // will be global for your application.
-
-  rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.medic.yaml)")
-
-
-  // Cobra also supports local flags, which will only run
-  // when this action is called directly.
-  rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
-}
-
-
-// initConfig reads in config file and ENV variables if set.
-func initConfig() {
-  // Get the config file path
-  if cfgFile == "" {
-    // if not provided, use the home directory
-    home, err := homedir.Dir()
-    if err != nil {
-      fmt.Println(err)
-      os.Exit(1)
-    }
-
-    cfgFile = home + "/.medic.yaml"
-  }
-
-  // If the config file doesn't exist, create it
-  if _, err := os.Stat(cfgFile); os.IsNotExist(err) {
-    fmt.Println("Required config not found at:", cfgFile)
-    fmt.Println("Creating initial file:", cfgFile)
-  	if err := config.GenerateSampleConfigYaml(cfgFile); err != nil {
-      fmt.Println(err.Error())
-      panic("error creating the missing config file")
-    }
-  }
-
-  // Once we know the config file exists, load it in
-  var conf *config.Configurations
-  conf, err := config.LoadConfigYaml(cfgFile)
+func Measure(cmd *cobra.Command, args []string) {
+  measurement, err := fastcom_svc.Measure()
   if err != nil {
-    fmt.Println(err.Error())
-    panic("error opening file")
+    fmt.Println(err)
+    os.Exit(1)
   }
 
-  // Store the config in viper
-  config.StoreConfigInViper(conf)
-}
 
+
+  fmt.Printf("Low:%.0f,High:%.0f,Avg:%.0f,Median:%.0f\n",
+    measurement.Minimum,
+    measurement.Maximum,
+    measurement.Average,
+    measurement.Median,
+  )
+}

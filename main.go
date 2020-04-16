@@ -15,7 +15,9 @@ limitations under the License.
 */
 package main
 
-import "medic/cmd"
+import (
+	"github.com/bmsandoval/gofastcom/cmd"
+)
 
 func main() {
   cmd.Execute()
