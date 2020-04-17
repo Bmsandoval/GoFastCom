@@ -7,6 +7,7 @@ import (
 )
 
 type Measurement struct {
+	Results []float64
 	Minimum float64
 	Maximum float64
 	Median float64
@@ -37,8 +38,8 @@ func Measure() (*Measurement, error) {
 	KbpsChan := make(chan float64)
 	go func() {
 		for Kbps := range KbpsChan {
-			speeds = append(speeds, Kbps)
-			sum += Kbps
+			speeds = append(speeds, Kbps/1000)
+			sum += Kbps/1000
 		}
 	}()
 
@@ -70,6 +71,7 @@ func Measure() (*Measurement, error) {
 	average := sum/float64(len(speeds))
 
 	return &Measurement{
+		Results: speeds,
 		Minimum: lowest,
 		Maximum: highest,
 		Median:  median,

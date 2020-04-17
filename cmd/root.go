@@ -18,6 +18,7 @@ package cmd
 import (
   "fmt"
   "github.com/bmsandoval/gofastcom/services/fastcom_svc"
+  "github.com/guptarohit/asciigraph"
   "github.com/spf13/cobra"
   "os"
 )
@@ -53,7 +54,7 @@ func Measure(cmd *cobra.Command, args []string) {
     fmt.Println(err)
     os.Exit(1)
   }
-
+  graph := asciigraph.Plot(measurement.Results)
 
 
   fmt.Printf("Low:%.0f,High:%.0f,Avg:%.0f,Median:%.0f\n",
@@ -62,4 +63,6 @@ func Measure(cmd *cobra.Command, args []string) {
     measurement.Average,
     measurement.Median,
   )
+  fmt.Println("")
+  fmt.Println(graph)
 }
