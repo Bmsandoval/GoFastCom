@@ -17,12 +17,12 @@ package cmd
 
 import (
   "fmt"
-  "github.com/bmsandoval/gofastcom/services/fastcom_svc"
-  "github.com/guptarohit/asciigraph"
+  "github.com/bmsandoval/gofastcom/pkg/services/fastcom_svc"
   "github.com/spf13/cobra"
   "os"
 )
 
+var DbLocation string
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
@@ -36,7 +36,6 @@ This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
   //Uncomment the following line if your bare application
   //has an action associated with it:
-  	Run: Measure,
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.
@@ -48,21 +47,19 @@ func Execute() {
   }
 }
 
-func Measure(cmd *cobra.Command, args []string) {
-  measurement, err := fastcom_svc.Measure()
-  if err != nil {
-    fmt.Println(err)
-    os.Exit(1)
-  }
-  graph := asciigraph.Plot(measurement.Results)
 
+func init() {
+    rootCmd.PersistentFlags().StringVar(&DbLocation, "db", "./gofastcom.db",
+        "db file path (default is './gofastcom.db', right next to this apps binary)")
 
-  fmt.Printf("Low:%.0f,High:%.0f,Avg:%.0f,Median:%.0f\n",
-    measurement.Minimum,
-    measurement.Maximum,
-    measurement.Average,
-    measurement.Median,
-  )
-  fmt.Println("")
-  fmt.Println(graph)
+	conn, err := fastcom_svc.DbConnect(DbLocation)
+	if err != nil {
+      fmt.Println(err)
+      os.Exit(1)
+    }
+
+    if err := fastcom_svc.Migrate(conn); err != nil {
+        fmt.Println(err)
+        os.Exit(1)
+    }
 }
