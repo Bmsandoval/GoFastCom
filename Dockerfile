@@ -11,12 +11,12 @@
 
 FROM golang:1.13-buster
 LABEL os=linux
-LABEL arch=arm64
+LABEL arch=amd64
 
 ENV GOOS=linux
-ENV GOARCH=arm64
+ENV GOARCH=amd64
 ENV CGO_ENABLED=1
-ENV CC=aarch64-linux-gnu-gcc
+#ENV CC=aarch64-linux-gnu-gcc
 ENV PATH="/go/bin/${GOOS}_${GOARCH}:${PATH}"
 ENV PKG_CONFIG_PATH=/usr/lib/aarch64-linux-gnu/pkgconfig
 

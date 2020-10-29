@@ -2,8 +2,8 @@ depend:
 	go mod vendor
 purge:
 	docker-compose down
-	docker rm $(docker ps -a -q)
-	docker rmi $(docker images -q)
+	docker rm `docker ps -a -q`
+	docker rmi `docker images -q`
 build:
 	# CGO_ENABLED=1 GOOS=linux go build -mod=vendor -a -installsuffix cgo -o app .
 	#CC=x86_64-w64-mingw32-gcc CGO_ENABLED=1 go build -mod=vendor -a -o app .
