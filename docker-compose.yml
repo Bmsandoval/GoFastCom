@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  gofastcom-builder:
+    container_name: "gofastcom-builder"
+    build:
+      context: "."
+      dockerfile: "Dockerfile"
+    volumes: # https://flaviocopes.com/docker-access-files-outside-container/
+      - ./:/gofastcom/
