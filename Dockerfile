@@ -11,10 +11,10 @@
 
 FROM golang:1.13-buster
 LABEL os=linux
-LABEL arch=amd64
+LABEL arch=auto
 
-ENV GOOS=linux
-ENV GOARCH=amd64
+#ENV GOOS=linux
+#ENV GOARCH=amd64
 ENV CGO_ENABLED=1
 #ENV CC=aarch64-linux-gnu-gcc
 #ENV PATH="/go/bin/${GOOS}_${GOARCH}:${PATH}"
@@ -48,5 +48,6 @@ WORKDIR /gofastcom
 ADD go.mod .
 ADD go.sum .
 RUN go mod download
+RUN arch
 
 ENTRYPOINT go build -mod=vendor -a -installsuffix cgo -o app .
