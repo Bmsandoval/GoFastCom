@@ -35,16 +35,16 @@
 # from the standard ports/downloads and therefore removed from this list.
 #
 PLATFORMS="darwin/amd64" # amd64 only as of go1.5
-PLATFORMS="$PLATFORMS windows/amd64 windows/386" # arm compilation not available for Windows
+#PLATFORMS="$PLATFORMS windows/amd64 windows/386" # arm compilation not available for Windows
 PLATFORMS="$PLATFORMS linux/amd64 linux/386"
-PLATFORMS="$PLATFORMS linux/ppc64 linux/ppc64le"
-PLATFORMS="$PLATFORMS linux/mips64 linux/mips64le" # experimental in go1.6
-PLATFORMS="$PLATFORMS freebsd/amd64"
-PLATFORMS="$PLATFORMS netbsd/amd64" # amd64 only as of go1.6
-PLATFORMS="$PLATFORMS openbsd/amd64" # amd64 only as of go1.6
-PLATFORMS="$PLATFORMS dragonfly/amd64" # amd64 only as of go1.5
-PLATFORMS="$PLATFORMS plan9/amd64 plan9/386" # as of go1.4
-PLATFORMS="$PLATFORMS solaris/amd64" # as of go1.3
+#PLATFORMS="$PLATFORMS linux/ppc64 linux/ppc64le"
+#PLATFORMS="$PLATFORMS linux/mips64 linux/mips64le" # experimental in go1.6
+#PLATFORMS="$PLATFORMS freebsd/amd64"
+#PLATFORMS="$PLATFORMS netbsd/amd64" # amd64 only as of go1.6
+#PLATFORMS="$PLATFORMS openbsd/amd64" # amd64 only as of go1.6
+#PLATFORMS="$PLATFORMS dragonfly/amd64" # amd64 only as of go1.5
+#PLATFORMS="$PLATFORMS plan9/amd64 plan9/386" # as of go1.4
+#PLATFORMS="$PLATFORMS solaris/amd64" # as of go1.3
 # ARMBUILDS lists the platforms that are currently supported.  From this list
 # we generate the following architectures:
 #
@@ -65,6 +65,7 @@ PLATFORMS_ARM="linux"
 # Shouldn't really need to modify anything below this line.  #
 ##############################################################
 type setopt >/dev/null 2>&1
+CGO_ENABLED=1
 SCRIPT_NAME=`basename "$0"`
 FAILURES=""
 OUTPUT=${PWD##*/}
@@ -72,7 +73,7 @@ for PLATFORM in $PLATFORMS; do
   GOOS=${PLATFORM%/*}
   GOARCH=${PLATFORM#*/}
   BIN_FILENAME="${OUTPUT}-${GOOS}-${GOARCH}"
-  if [[ "${GOOS}" == "windows" ]]; then BIN_FILENAME="${BIN_FILENAME}.exe"; fi
+#  if [[ "${GOOS}" == "windows" ]]; then BIN_FILENAME="${BIN_FILENAME}.exe"; fi
   CMD="GOOS=${GOOS} GOARCH=${GOARCH} go build -o builds/${BIN_FILENAME} ."
   echo "${CMD}"
   eval $CMD || FAILURES="${FAILURES} ${PLATFORM}"

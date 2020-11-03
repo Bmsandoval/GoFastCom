@@ -2,7 +2,7 @@ depend:
 	go mod vendor
 clean:
 	docker-compose down
-	-rm app
+	-rm -rf builds/*
 purge: clean
 	docker image prune -f
 build: purge
