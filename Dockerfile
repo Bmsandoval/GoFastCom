@@ -1,8 +1,8 @@
 FROM golang:1.13-buster
 LABEL os=linux
-LABEL arch=arm64
+LABEL arch=armv71
 ENV GOOS=linux
-ENV GOARCH=arm64
+ENV GOARCH=armv71
 ENV CGO_ENABLED=1
 ENV CC=aarch64-linux-gnu-gcc
 ENV PATH="/go/bin/${GOOS}_${GOARCH}:${PATH}"
@@ -43,4 +43,5 @@ RUN go mod download
 RUN ls
 RUN arch
 
+ENV GOARCH=armv71
 ENTRYPOINT go build -mod=vendor -a -installsuffix cgo -o app .
