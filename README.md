@@ -3,12 +3,13 @@ Table of contents
    * [Table of contents](#table-of-contents)
    * [Overview](#overview)
    * [Setup Staging](#setup-staging)
+   * [Troubleshooting](#troubleshooting)
    
-# Overview
+## Overview
 This is a tool to measure your download speed statistics over time. It runs on a local sqlite database for simplicity.
 I'm planning to run this on a cron and build a for a parent node to poll the children for data.
 
-# Setup Staging
+## Setup Staging
 >### Get the .git file, do nothing else
 >```
 >git clone -n git@github.com:bmsandoval/gofastcom.git --depth 1
@@ -25,3 +26,8 @@ I'm planning to run this on a cron and build a for a parent node to poll the chi
 >```
 >. ./scripts/run.sh
 >```
+
+## Troubleshooting
+sandman at hunin in ~/projects/gofastcom on master
+$ ./app
+./app: /lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.28' not found (required by ./app)
