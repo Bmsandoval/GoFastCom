@@ -60,7 +60,7 @@ FROM golang:1.13-buster
 
 FROM golang:1.13-buster
 LABEL os=linux
-LABEL arch=arm64
+LABEL arch=armhf
 
 #ENV GOOS=linux
 #ENV GOARCH=arm64
@@ -98,4 +98,4 @@ ADD go.mod .
 ADD go.sum .
 RUN go mod download
 
-ENTRYPOINT go build -mod=vendor -a -installsuffix cgo -o app .
+ENTRYPOINT go build -mod=vendor -a -installsuffix cgo -o builds/armhf.elf .
