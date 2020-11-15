@@ -9,6 +9,9 @@ run-local:
 	go run .
 run-docker: purge
 	sudo docker-compose up --force-recreate --build -d
-	sudo docker-compose logs -f gofastcom
+	-echo "Container is now created, tailing logs..."
 run-tail:
+	-echo "Tailing logs..."
+	-echo "To exit, type ctrl+<c>."
+	-echo "After exiting, you can resume tailing the logs by running 'make run-tail'"
 	sudo docker-compose logs -f gofastcom
