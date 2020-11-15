@@ -8,4 +8,4 @@ purge: clean
 run-local:
 	go run .
 run-docker: purge
-	sudo docker-compose up --force-recreate --build
+	sudo docker-compose up --force-recreate --build -d

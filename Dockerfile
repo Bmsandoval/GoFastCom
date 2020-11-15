@@ -5,14 +5,14 @@ LABEL arch=armhf
 RUN apt update
 RUN apt install -y cron
 
-# Copy cron file to the cron.d directory
-ADD cron /etc/cron.d/speedy-cron
+# Copy staging-cron file to the staging-cron.d directory
+ADD staging-cron /etc/cron.d/staging-cron
 
-# Give execution rights on the cron job
-RUN chmod 0644 /etc/cron.d/speedy-cron
+# Give execution rights on the staging-cron job
+RUN chmod 0644 /etc/cron.d/staging-cron
 
-# Apply cron job
-RUN crontab /etc/cron.d/speedy-cron
+# Apply staging-cron job
+RUN crontab /etc/cron.d/staging-cron
 
 # Create the log file to be able to run tail
 RUN touch /var/log/cron.log

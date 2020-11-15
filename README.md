@@ -54,7 +54,7 @@ I'm planning to run this on a cron and build a for a parent node to poll the chi
 >EOF
 >```
 
->### Boot the pi and login
+>### Boot the Pi and login
 >* now boot your pi with the sd card in. I'd recommend watching your router for a new ip to pop up
 >* once you know the ip, ssh into the pi `ssh pi@ip_address`. reminder that the initial user is `pi` and password is `raspberry`
 >* before you do anything else, this is a pi's first boot, so change at least the password
@@ -80,6 +80,24 @@ I'm planning to run this on a cron and build a for a parent node to poll the chi
 >* now we need to install docker compose. `sudo apt install docker-compose -y`
 >* docker-compose likely won't work at first. Restart the pi `sudo shutdown -r now`
 >* now try starting the builder `docker-compose up`
+
+>### Optional Steps
+>On boot, pull changes and start the container
+>* Create a staging cron file in the cron.d directory
+>```
+> echo "@reboot cd /gofastcom; ./scripts/run-docker.sh" > /etc/cron.d/pi-boot-cron
+>```
+>* Give execution rights on the pi-cron job
+>```
+> chmod 0644 /etc/cron.d/pi-boot-cron
+>```
+>* Apply pi-cron job
+>```
+> crontab /etc/cron.d/pi-boot-cron
+>```
+
+
+>### (OPTIONAL) Hot-reload container
 
 ------------------------------------------------------------------------
 ## Troubleshooting
