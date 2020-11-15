@@ -7,7 +7,3 @@ purge: clean
 	docker image prune -f
 build: purge
 	docker-compose up --force-recreate --build
-build-all:
-	./scripts/build-all.sh
-
-

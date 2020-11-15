@@ -65,29 +65,30 @@ PLATFORMS_ARM="linux"
 # Shouldn't really need to modify anything below this line.  #
 ##############################################################
 type setopt >/dev/null 2>&1
-CGO_ENABLED=1
+export CGO_ENABLED=1
 SCRIPT_NAME=`basename "$0"`
 FAILURES=""
 OUTPUT=${PWD##*/}
-for PLATFORM in $PLATFORMS; do
-  GOOS=${PLATFORM%/*}
-  GOARCH=${PLATFORM#*/}
-  BIN_FILENAME="${OUTPUT}-${GOOS}-${GOARCH}"
-#  if [[ "${GOOS}" == "windows" ]]; then BIN_FILENAME="${BIN_FILENAME}.exe"; fi
-  CMD="GOOS=${GOOS} GOARCH=${GOARCH} go build -mod=vendor -a -installsuffix cgo -o builds/${BIN_FILENAME} ."
-  echo "${CMD}"
-  eval $CMD || FAILURES="${FAILURES} ${PLATFORM}"
-done
+#for PLATFORM in $PLATFORMS; do
+#  GOOS=${PLATFORM%/*}
+#  GOARCH=${PLATFORM#*/}
+#  BIN_FILENAME="${OUTPUT}-${GOOS}-${GOARCH}"
+##  if [[ "${GOOS}" == "windows" ]]; then BIN_FILENAME="${BIN_FILENAME}.exe"; fi
+#  CMD="GOOS=${GOOS} GOARCH=${GOARCH} go build -mod=vendor -a -installsuffix cgo -o builds/${BIN_FILENAME} ."
+#  echo "${CMD}"
+#  eval $CMD || FAILURES="${FAILURES} ${PLATFORM}"
+#done
 # ARM builds
-if [[ $PLATFORMS_ARM == *"linux"* ]]; then
-  CMD="GOOS=linux GOARCH=arm64 go build -mod=vendor -a -installsuffix cgo -o builds/${OUTPUT}-linux-arm64 ."
-  echo "${CMD}"
-  eval $CMD || FAILURES="${FAILURES} ${PLATFORM}"
-fi
+#if [[ $PLATFORMS_ARM == *"linux"* ]]; then
+#  CMD="GOOS=linux GOARCH=arm64 go build -mod=vendor -a -installsuffix cgo -o builds/${OUTPUT}-linux-arm64 ."
+#  echo "${CMD}"
+#  eval $CMD || FAILURES="${FAILURES} ${PLATFORM}"
+#fi
 for GOOS in $PLATFORMS_ARM; do
   GOARCH="arm"
   # build for each ARM version
-  for GOARM in 7 6 5; do
+#  for GOARM in 7 6 5; do
+  for GOARM in 7; do
     BIN_FILENAME="${OUTPUT}-${GOOS}-${GOARCH}${GOARM}"
     CMD="GOARM=${GOARM} GOOS=${GOOS} GOARCH=${GOARCH} go build -mod=vendor -a -installsuffix cgo -o builds/${BIN_FILENAME} ."
     echo "${CMD}"
