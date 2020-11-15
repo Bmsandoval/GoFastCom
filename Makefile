@@ -7,5 +7,5 @@ purge: clean
 	sudo docker image prune -f
 run-local:
 	go run .
-build: purge
+run-docker: purge
 	sudo docker-compose up --force-recreate --build
