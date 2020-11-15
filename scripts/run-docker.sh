@@ -14,4 +14,5 @@ if [ "$HEADHASH" != "$UPSTREAMPARSED" ]; then
   git pull
 fi
 
+cd ..
 make run-docker
