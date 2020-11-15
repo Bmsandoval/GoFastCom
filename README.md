@@ -58,28 +58,25 @@ I'm planning to run this on a cron and build a for a parent node to poll the chi
 >* now boot your pi with the sd card in. I'd recommend watching your router for a new ip to pop up
 >* once you know the ip, ssh into the pi `ssh pi@ip_address`. reminder that the initial user is `pi` and password is `raspberry`
 
+>### Setup SSH Keys
+>* create your ssh keys by running `ssh-keygen -t rsa` and just hit enter a few times
+>* start the ssh agent `eval "$(ssh-agent -s)"`
+>* add the new ssh keys to your keychaing `ssh-add ~/.ssh/id_rsa`
+
+>### Setup Git
+>* actually install git `sudo apt install git`
+>* add the id_rsa.pub to your github's ssh keys
+>* should now be able to clone this repo `git clone git@github.com:bmsandoval/gofastcom.git`
+
 >### Install Docker
 >* follow the instructions on `https://docs.docker.com/engine/install/ubuntu/`
->* be sure to follow the instructions for the right architecture (armhf for raspberry pi)
->* the following is roughly the commands required as of 11/14/2020
->```
->sudo apt-get update && \
->sudo apt-get install apt-transport-https ca-certificates curl gnupg-agent software-properties-common -y && \
->curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add - && \
->sudo add-apt-repository "deb [arch=armhf] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" && \
->sudo apt-get update && \
->sudo apt-get install docker-ce docker-ce-cli containerd.io -y && \
->docker -v
->```
+>* run the following to install docker ce on the pi
 >```
 >curl -fSLs https://get.docker.com | sudo sh
 >```
-
->### Setup Git
->* create your ssh keys by running `ssh-keygen -t rsa` and just hit enter a few times
->* add the new ssh keys to your keychaing `ssh-add ~/.ssh/id_rsa`
->* now make sure to add the id_rsa.pub to your github's ssh keys
->* should now be able to clone this repo `git clone git@github.com:bmsandoval/gofastcom.git clone`
+>* now we need to install docker compose. `sudo apt install docker-compose -y`
+>* docker-compose likely won't work at first. Restart the pi `sudo shutdown -r now`
+>* now try starting the builder `docker-compose up`
 
 ------------------------------------------------------------------------
 ## Troubleshooting
