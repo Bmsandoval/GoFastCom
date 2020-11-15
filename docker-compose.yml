@@ -1,8 +1,8 @@
 version: '3'
 
 services:
-  gofastcom-builder:
-    container_name: "gofastcom-builder"
+  gofastcom:
+    container_name: "gofastcom"
     build:
       context: "."
       dockerfile: "Dockerfile"

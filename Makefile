@@ -9,3 +9,6 @@ run-local:
 	go run .
 run-docker: purge
 	sudo docker-compose up --force-recreate --build -d
+	sudo docker-compose logs -f gofastcom
+run-tail:
+	sudo docker-compose logs -f gofastcom
