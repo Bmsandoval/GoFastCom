@@ -57,6 +57,8 @@ I'm planning to run this on a cron and build a for a parent node to poll the chi
 >### Boot the pi and login
 >* now boot your pi with the sd card in. I'd recommend watching your router for a new ip to pop up
 >* once you know the ip, ssh into the pi `ssh pi@ip_address`. reminder that the initial user is `pi` and password is `raspberry`
+>* before you do anything else, this is a pi's first boot, so change at least the password
+>   * this is highly recommended since you will have a ssh key stored on it for your github
 
 >### Setup SSH Keys
 >* create your ssh keys by running `ssh-keygen -t rsa` and just hit enter a few times
@@ -66,7 +68,8 @@ I'm planning to run this on a cron and build a for a parent node to poll the chi
 >### Setup Git
 >* actually install git `sudo apt install git`
 >* add the id_rsa.pub to your github's ssh keys
->* should now be able to clone this repo `git clone git@github.com:bmsandoval/gofastcom.git`
+>* should now be able to clone this repo
+>   * clone it into your home directory `cd; git clone git@github.com:bmsandoval/gofastcom.git`
 
 >### Install Docker
 >* follow the instructions on `https://docs.docker.com/engine/install/ubuntu/`

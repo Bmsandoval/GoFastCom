@@ -1,0 +1,3 @@
+# run every 5 minutes. run the command at a random interval between now and 150 seconds later
+*/5 * * * * sleep $(( RANDOM \% 150 )); cd /; go run record
+# An empty line is required at the end of this file for a valid cron file.

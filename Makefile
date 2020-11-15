@@ -1,9 +1,11 @@
 depend:
 	go mod vendor
 clean:
-	docker-compose down
+	sudo docker-compose down
 	-rm -rf builds/*
 purge: clean
-	docker image prune -f
+	sudo docker image prune -f
+run-local:
+	go run .
 build: purge
-	docker-compose up --force-recreate --build
+	sudo docker-compose up --force-recreate --build
