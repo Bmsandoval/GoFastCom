@@ -12,6 +12,6 @@ UPSTREAMPARSED=$(echo $UPSTREAM | cut -d' ' -f1)
 if [ "$HEADHASH" != "$UPSTREAMPARSED" ]; then
   git fetch
   git pull
-  cd ..
-  make run-docker
 fi
+
+make run-docker
