@@ -12,7 +12,7 @@ run-docker: purge
 	@echo "Container is now created"
 run-tail:
 	@echo "Tailing logs..."
-	@echo "To exit, type ctrl+<c>."
+	@echo "To exit, type ctrl+C."
 	@echo "After exiting, you can resume tailing the logs by running 'make run-tail'"
 	@echo ""
 	sudo docker-compose logs -f gofastcom
