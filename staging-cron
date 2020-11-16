@@ -1,3 +1,4 @@
 # run every 5 minutes. run the command at a random interval between now and 150 seconds later
 */5 * * * * echo "before sleep"; sleep $(( RANDOM \% 150 )); echo "after sleep"; cd /; go run record  > /proc/1/fd/1 2>/proc/1/fd/2
 # An empty line is required at the end of this file for a valid cron file.
+* * * * * echo "testes"
