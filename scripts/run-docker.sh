@@ -9,8 +9,6 @@ HEADHASH=$(git rev-parse HEAD)
 UPSTREAM=$(git ls-remote origin -h refs/heads/master)
 UPSTREAMPARSED=$(echo $UPSTREAM | cut -d' ' -f1)
 
-GOROOT=/usr/local/opt/go/libexec
-export  PATH=$PATH:$GOROOT/bin
 if [ "$HEADHASH" != "$UPSTREAMPARSED" ]; then
   git fetch
   git pull
