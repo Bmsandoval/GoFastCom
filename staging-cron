@@ -1,2 +1,2 @@
 # run every 5 minutes. run the command at a random interval between now and 150 seconds later
-*/5 * * * * sleep $(( RANDOM \% 150 )); cd /gofastcom; scripts/staging-runs.sh  > /proc/1/fd/1 2>/proc/1/fd/2
+*/5 * * * * sleep $(( RANDOM \% 150 )); cd /gofastcom; scripts/staging-runner.sh  > /proc/1/fd/1 2>/proc/1/fd/2
