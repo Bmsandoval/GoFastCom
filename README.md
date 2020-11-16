@@ -85,7 +85,7 @@ I'm planning to run this on a cron and build a for a parent node to poll the chi
 >On boot, pull changes and start the container
 >* Create a staging cron file in the cron.d directory
 >```
-> echo "@reboot cd /gofastcom; ./scripts/run-docker.sh" > /etc/cron.d/pi-boot-cron
+> echo "@reboot cd /gofastcom; ./scripts/run-docker.sh; make run-docker" > /etc/cron.d/pi-boot-cron
 >```
 >* Give execution rights on the pi-cron job
 >```
