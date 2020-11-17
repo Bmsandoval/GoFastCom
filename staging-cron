@@ -1,2 +1,7 @@
+SHELL=/bin/bash
+HOME=/root
+PATH=/go/bin:/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+GOPATH=/go
+
 # run every 5 minutes. run the command at a random interval between now and 150 seconds later
-*/5 * * * * sleep $(( RANDOM \% 150 )); cd /gofastcom; scripts/staging-runner.sh  > /proc/1/fd/1 2>/proc/1/fd/2
+*/5 * * * * sleep $(( RANDOM \% 150 )); cd /gofastcom; go run . record  > /proc/1/fd/1 2>/proc/1/fd/2

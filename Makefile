@@ -13,6 +13,5 @@ run-docker: purge
 run-tail:
 	@echo "Tailing logs..."
 	@echo "To exit, type ctrl+C."
-	@echo "After exiting, you can resume tailing the logs by running 'make run-tail'"
 	@echo ""
 	sudo docker-compose logs -f gofastcom
