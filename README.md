@@ -31,7 +31,44 @@ I'm planning to run this on a cron and build a for a parent node to poll the chi
 >```
 
 ------------------------------------------------------------------------
-## RPI Configuration
+## RPI (LOCAL) Setup
+Must do local setup if you want to use multiple network interfaces
+>### Install golang 
+>```
+>wget https://dl.google.com/go/go1.13.7.linux-armv6l.tar.gz -O go.tar.gz &&
+>sudo tar -C /usr/local -xzf go.tar.gz &&
+>rm https://dl.google.com/go/go1.13.7.linux-armv6l.tar.gz &&
+>cat > ~/.bashrc<< 'EOF'
+>export GOPATH=$HOME/go
+>export PATH=/usr/local/go/bin:$PATH:$GOPATH/bin
+>EOV
+>```
+
+>### Setup Network Interface Hopper (firejail)
+>* Install Firejail
+>```
+>sudo apt install firejail
+>```
+>* Configure it by changing `restricted_network` to `no`
+>```
+>sudo vim /etc/firejail/firejail.config
+>```
+>* Check your network interfaces
+>```
+>ip link show
+>```
+>* Give it a test
+>```
+>firejail --dns=8.8.8.8 --noprofile --net=enxa0cec8d9f9c8 ./builds/gof_pi4 measure
+>```
+>```
+>firejail --dns=8.8.8.8 --noprofile --net=eth0 ./builds/gof_pi4 measure
+>```
+
+
+
+------------------------------------------------------------------------
+## RPI (DOCKER) Configuration
 >### Setup sd card
 >These instructions are based on a Mac
 >* flash a sd card. BalenaEtcher works pretty good on mac
