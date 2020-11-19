@@ -41,7 +41,7 @@ I'm planning to run this on a cron and build a for a parent node to poll the chi
 >```
 >* optionally setup your wifi network before startup in a similar way
 >```
->echo << 'EOF' > /Volumes/boot/wpa_supplicant.conf
+>cat > /Volumes/boot/wpa_supplicant.conf<< 'EOF'
 >country=us
 >update_config=1
 >ctrl_interface=/var/run/wpa_supplicant
@@ -52,6 +52,10 @@ I'm planning to run this on a cron and build a for a parent node to poll the chi
 > psk="Pa55w0rd1234"
 >}
 >EOF
+>```
+>* that last step just created a sample file. update it as needed
+>```
+>vim /Volumes/boot/wpa_supplicant.conf
 >```
 
 >### Boot the Pi and login
